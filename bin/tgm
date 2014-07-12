@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'tgm'
+
+chatter = Tgm::Chatter.new
+chatter.say_hello
