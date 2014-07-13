@@ -1,4 +1,4 @@
-# Tgm
+# Terminal Gmail - A Gmail CLI
 
 TODO: Write a gem description
 
