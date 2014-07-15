@@ -1,6 +1,6 @@
 # Terminal Gmail - A Gmail CLI
 
-TODO: Write a gem description
+A command line tool for Gmail. 
 
 ## Installation
 
@@ -18,7 +18,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Current Commands:
+
+	tgm
+
+This command will run the interface. (Sending Mail)
 
 ## Contributing
 
