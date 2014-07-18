@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'tgm/cli'
+require 'gmail'
 require 'tgm'
 
-chatter = Tgm::Chatter.new
-chatter.say_hello
+Tgm::CLI.start(ARGV)

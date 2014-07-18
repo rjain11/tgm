@@ -1,51 +1,26 @@
-require "tgm/version"
-require "gmail"
+require 'tgm/cli'
+require 'time'
 
 module Tgm
-  # Your code goes here...
-  class Chatter
-  	def say_hello
-  		puts("Hi! Welcome to terminal_gmail")
-		puts("Enter Username: ")
-		username = gets().chomp
-		puts("Enter Password: ")
-		password = gets().chomp
+  class << self
+    # Convert time to local time by applying the `utc_offset` setting.
+    def local_time(time)
+      utc_offset ? (time.dup.utc + utc_offset) : time.localtime
+    end
 
-		gmail = Gmail.connect!(username, password)
-		puts("Authorized User!")
-		puts("Enter email-id of the person you want to send the email:")
-		gid=gets().chomp
-		puts("Enter the subject of the mail: ")
-		sub=gets().chomp
-		puts("Enter the message: ")
-		body_mail=gets()
-		body_mail= body_mail.to_s + 'Sent from Terminal'
+    # UTC offset in seconds to apply time instances before displaying.
+    # If not set, time instances are displayed in default local time.
+    attr_reader :utc_offset
 
-		puts("Any attachment(y/n): ")
-		flag_attachment=gets().chomp
-		if flag_attachment.to_s =='y'
-			puts('Enter the path for the attachment:')
-			attachment_path=gets().chomp
-		elsif flag_attachment.to_s !='y'
-			puts('No attachment! Preparing to send the mail....')
-		end
-		puts("Send? Click s to send. Anything else will abort the operation.")
-		flag_send=gets().chomp
-
-		if flag_send=='s'
-			email=gmail.compose do
-  				to gid
-  				subject sub
-    			body body_mail
-    			#add_file attachment_path
-  			end
-  			gmail.deliver(email)
-  			puts()
-  			puts("Email sent!")
-  		else
-  			puts("Aborted..Thanks for using Terminal Gmail")
-  		end	
-	gmail.logout
-  	end
+    def utc_offset=(offset)
+      @utc_offset = case offset
+      when String
+        Time.zone_offset(offset)
+      when NilClass
+        nil
+      else
+        offset.to_i
+      end
+    end
   end
 end
