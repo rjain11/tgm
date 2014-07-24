@@ -23,4 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "gmail"
   spec.add_development_dependency "thor"
   spec.add_development_dependency "ruby-gmail"
+  spec.add_development_dependency "launchy"
 end
