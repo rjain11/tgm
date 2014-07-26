@@ -10,7 +10,7 @@ module Tgm
     def login
       $username = ask 'Enter your username:'
       $password = ask 'Enter your password:'
-      $gmail = Gmail.connect($username, $password)
+      $gmail = Gmail.connect!($username, $password)
       say 'User Authorized!'
       to_mail = ask 'Enter email-id:'
       subject_mail = ask 'Enter subject:'
