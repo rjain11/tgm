@@ -52,6 +52,16 @@ module Tgm
       say 'Number of mails in '+labelname.to_s+': '+noEmailsInLabel.to_s
       gmail.logout
     end
+    desc 'from', 'Get mails from a specific address'
+    def mail_from
+      $username = ask 'Enter your username:'
+      $password = ask 'Enter your password:'
+      gmail = Gmail.new($username, $password)
+      id_from = ask 'From: '
+      
+
+      gmail.logout
+    end
   end
 end
 
