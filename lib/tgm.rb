@@ -17,11 +17,11 @@ module Tgm
     def mail
       $username = ask 'Enter your username:'
       $password = ask 'Enter your password:'
-      gmail = Gmail.new($username, $password)
+      gmail = Gmail.connect!($username, $password)
       to_mail = ask 'Enter email-id:'
       subject_mail = ask 'Enter subject:'
       body_mail = ask 'Enter body:'
-      email=gmail.generate_message do
+      email=gmail.compose do
         to to_mail
         subject subject_mail
         body body_mail
@@ -33,7 +33,7 @@ module Tgm
     def inbox
       $username = ask 'Enter your username:'
       $password = ask 'Enter your password:'
-      gmail = Gmail.new($username, $password)
+      gmail = Gmail.connect!($username, $password)
       noInbox=gmail.inbox.count
       noUnread=gmail.inbox.count(:unread)
       noRead=gmail.inbox.count(:read)
@@ -46,7 +46,7 @@ module Tgm
     def labels
       $username = ask 'Enter your username:'
       $password = ask 'Enter your password:'
-      gmail = Gmail.new($username, $password)
+      gmail = Gmail.connect!($username, $password)
       labelname = ask 'Enter the label name: '
       noEmailsInLabel=gmail.mailbox(labelname).count
       say 'Number of mails in '+labelname.to_s+': '+noEmailsInLabel.to_s
