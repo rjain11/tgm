@@ -53,13 +53,13 @@ module Tgm
       gmail.logout
     end
     desc 'from', 'Get mails from a specific address'
-    def mail_from
+    method_option :user, :required => true
+    def from
       $username = ask 'Enter your username:'
       $password = ask 'Enter your password:'
-      gmail = Gmail.new($username, $password)
-      id_from = ask 'From: '
-      
-
+      gmail = Gmail.connect!($username, $password)
+      say 'Emails from: '+options[:user].to_s
+      say 'Count: '+gmail.inbox.count(:from => options[:user]).to_s
       gmail.logout
     end
   end
