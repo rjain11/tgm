@@ -59,7 +59,11 @@ module Tgm
       $password = ask 'Enter your password:'
       gmail = Gmail.connect!($username, $password)
       say 'Emails from: '+options[:user].to_s
-      say 'Count: '+gmail.inbox.count(:from => options[:user]).to_s
+      say 'Count: '+gmail.mailbox('[Gmail]/All Mail').count(:from => options[:user]).to_s
+      @messages=gmail.mailbox('[Gmail]/All Mail').search(:from => options[:user])
+      @messages.each do |email|
+        say email.subject
+      end
       gmail.logout
     end
   end
