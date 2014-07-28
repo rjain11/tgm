@@ -46,6 +46,8 @@ module Tgm
     method_option :all, :type => :boolean
     method_option :name #:aliases => '-n'
     method_option :create #:aliases => '-c'
+    method_option :delete
+    method_option :exists
     def labels
       $username = ask 'Enter your username:'
       $password = ask 'Enter your password:'
@@ -63,7 +65,18 @@ module Tgm
       end
       if options[:create]
         gmail.labels.add(options[:create])
-        say 'Label '+options[:create].to_s+' created'
+        say 'Label '+options[:create].to_s+' created.'
+      end
+      if options[:delete]
+        gmail.labels.delete(options[:delete])
+        say 'Label '+options[:delete].to_s+' deleted.'
+      end
+      if options[:exists]
+        if gmail.labels.exists?(options[:exists])==true
+          say 'Label exists.'
+        else
+          say 'Label does not exists.'
+        end
       end
       gmail.logout
     end
