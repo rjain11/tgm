@@ -6,6 +6,14 @@ require "shellwords"
 module Tgm
   # Your code goes here...
   class CLI < Thor 
+    desc 'launch', 'Launch gmail in browser'
+    def launch
+      require 'launchy'
+      say 'Launching Gmail...'
+      sleep(1)
+      Launchy.open( "http://www.gmail.com" )
+    end
+
     desc 'login', 'Log into your gmail account.'
     def login
       $username = ask 'Enter your username:'
