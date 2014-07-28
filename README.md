@@ -20,9 +20,20 @@ Or install it yourself as:
 
 Current Commands:
 
-	tgm
+	tgm help [COMMAND]
 
-This command will run the interface. (Sending Mail)
+	tgm launch
+
+	tgm login
+
+	tgm labels
+
+	tgm mail
+
+	tgm from 
+
+
+
 
 ## Contributing
 
