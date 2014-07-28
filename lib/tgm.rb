@@ -43,9 +43,9 @@ module Tgm
       gmail.logout
     end
     desc 'labels', 'Manage your labels'
-    method_option :name, :aliases => '-n'
-    method_option :all => :boolean, :default => false
-    method_option :create, :aliases => '-c'
+    method_option :all, :type => :boolean
+    method_option :name #:aliases => '-n'
+    method_option :create #:aliases => '-c'
     def labels
       $username = ask 'Enter your username:'
       $password = ask 'Enter your password:'
