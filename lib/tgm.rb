@@ -42,9 +42,10 @@ module Tgm
       say 'Number of Read Mails: '+noRead.to_s
       gmail.logout
     end
-    desc 'labels', 'Get info about all your labels'
+    desc 'labels', 'Manage your labels'
     method_option :name, :aliases => '-n'
-    method_options :all => :boolean, :default => false
+    method_option :all => :boolean, :default => false
+    method_option :create, :aliases => '-c'
     def labels
       $username = ask 'Enter your username:'
       $password = ask 'Enter your password:'
@@ -59,6 +60,10 @@ module Tgm
       if options[:name]
         noEmailsInLabel=gmail.mailbox(options[:name]).count
         say 'Number of mails in '+(options[:name]).to_s+': '+noEmailsInLabel.to_s
+      end
+      if options[:create]
+        gmail.labels.add(options[:create])
+        say 'Label '+options[:create].to_s+' created'
       end
       gmail.logout
     end
