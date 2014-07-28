@@ -43,13 +43,23 @@ module Tgm
       gmail.logout
     end
     desc 'labels', 'Get info about all your labels'
+    method_option :name, :aliases => '-n'
+    method_options :all => :boolean, :default => false
     def labels
       $username = ask 'Enter your username:'
       $password = ask 'Enter your password:'
       gmail = Gmail.connect!($username, $password)
-      labelname = ask 'Enter the label name: '
-      noEmailsInLabel=gmail.mailbox(labelname).count
-      say 'Number of mails in '+labelname.to_s+': '+noEmailsInLabel.to_s
+      if options[:all]==true
+        @labels=gmail.labels.all
+        say 'All Labels:'
+        @labels.each do |name|
+          say name
+        end
+      end
+      if options[:name]
+        noEmailsInLabel=gmail.mailbox(options[:name]).count
+        say 'Number of mails in '+(options[:name]).to_s+': '+noEmailsInLabel.to_s
+      end
       gmail.logout
     end
     desc 'from', 'Get mails from a specific address'
@@ -62,7 +72,7 @@ module Tgm
       say 'Count: '+gmail.mailbox('[Gmail]/All Mail').count(:from => options[:user]).to_s
       @messages=gmail.mailbox('[Gmail]/All Mail').search(:from => options[:user])
       @messages.each do |email|
-        say email.subject
+        say email.raw_message
       end
       gmail.logout
     end
