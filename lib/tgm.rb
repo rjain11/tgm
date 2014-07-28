@@ -44,10 +44,10 @@ module Tgm
     end
     desc 'labels', 'Manage your labels'
     method_option :all, :type => :boolean
-    method_option :name #:aliases => '-n'
-    method_option :create #:aliases => '-c'
-    method_option :delete
-    method_option :exists
+    method_option :name, :aliases => '-n'
+    method_option :create, :aliases => '-c'
+    method_option :delete, :aliases => '-d'
+    method_option :exists, :aliases => '-e'
     def labels
       $username = ask 'Enter your username:'
       $password = ask 'Enter your password:'
@@ -64,7 +64,7 @@ module Tgm
         say 'Number of mails in '+(options[:name]).to_s+': '+noEmailsInLabel.to_s
       end
       if options[:create]
-        gmail.labels.add(options[:create])
+        gmail.labels.new(options[:create])
         say 'Label '+options[:create].to_s+' created.'
       end
       if options[:delete]
