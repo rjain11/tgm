@@ -1,6 +1,6 @@
 # Terminal Gmail - A Gmail CLI
 
-A command line tool for Gmail. (In production)
+A command line tool for Gmail. 
 
 ## Installation
 
