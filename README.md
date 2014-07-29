@@ -16,6 +16,8 @@ Or install it yourself as:
 
     $ gem install tgm
 
+** Uninstall the gmail gem and install it from the repository directly. (manually) 
+
 ## Usage
 
 Current Commands:
