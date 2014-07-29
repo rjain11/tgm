@@ -28,15 +28,23 @@ Use this command to get more information about another tgm command.
 
 	tgm launch
 	
-Use this command to launch gmail.com in your browser
+Use this command to launch gmail.com in your browser.
 
 	tgm login
 
+Use this commmand to login into your gmail account.
+
 	tgm labels
+
+Use this command to manage your labels.
 
 	tgm mail
 
+Use this command to send a mail to someone.
+
 	tgm from 
+
+Use this command to fiddle with mails from someone.
 
 
 
