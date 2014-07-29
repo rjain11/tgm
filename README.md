@@ -23,8 +23,12 @@ Or install it yourself as:
 Current Commands:
 
 	tgm help [COMMAND]
+	
+Use this command to get more information about another tgm command.
 
 	tgm launch
+	
+Use this command to launch gmail.com in your browser
 
 	tgm login
 
