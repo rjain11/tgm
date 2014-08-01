@@ -102,6 +102,10 @@ module Tgm
       end
       gmail.logout
     end
+    desc 'read', 'Mark all emails as read.'
+    def read
+      
+    end
   end
 end
 
