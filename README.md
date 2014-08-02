@@ -17,7 +17,7 @@ Or install it yourself as:
     $ gem install tgm
 
 ** Uninstall the gmail gem and install it from the repository directly. (manually) 
-** Repository: https://github.com/rishabhjain2795/gmail
+** Repository: https://github.com/rishabhjain2795/gmail (Forked from nu7hatch/gmail)
 
 ## Usage
 
