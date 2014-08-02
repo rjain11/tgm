@@ -50,7 +50,9 @@ Use this command to fiddle with mails from someone.
 
 Mark all the emails as read.
 
+	tgm delete [FROM]
 
+Delete all emails from a particular user.
 
 
 ## Contributing
