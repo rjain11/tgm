@@ -46,6 +46,10 @@ Use this command to send a mail to someone.
 
 Use this command to fiddle with mails from someone.
 
+	tgm read
+
+Mark all the emails as read.
+
 
 
 
