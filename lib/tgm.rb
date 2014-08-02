@@ -113,6 +113,17 @@ module Tgm
       end
       gmail.logout
     end
+    desc 'delete', 'Delete emails from a particular user'
+    method_option :from, :required => true
+    def delete
+      $username = ask 'Enter your username: '
+      $password = ask 'Enter your password: '
+      gmail = Gmail.connect!($username,$password)
+      gmail.inbox.find(:from => options[:from]).each do |email|
+        email.delete!
+      end
+      gmail.logout
+    end
   end
 end
 
