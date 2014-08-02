@@ -104,7 +104,14 @@ module Tgm
     end
     desc 'read', 'Mark all emails as read.'
     def read
-      
+      $username = ask 'Enter your username: '
+      $password = ask 'Enter your password: '
+      gmail = Gmail.connect!($username,$password)
+      @unreademails=gmail.inbox.emails(:unread)
+      @unreademails.each do |email|
+        email.read!
+      end
+      gmail.logout
     end
   end
 end
