@@ -2,6 +2,8 @@ require "tgm/version"
 require "gmail"
 require "thor"
 require "shellwords"
+require 'yaml'
+#create a single login
 
 module Tgm
   # Your code goes here...
