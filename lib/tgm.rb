@@ -7,7 +7,13 @@ require 'yaml'
 
 module Tgm
   # Your code goes here...
-  class CLI < Thor 
+  class CLI < Thor
+
+    def initialize(*args)
+      super
+      read_config
+    end
+
     desc 'launch', 'Launch gmail in browser'
     def launch
       require 'launchy'
@@ -18,16 +24,13 @@ module Tgm
 
     desc 'login', 'Log into your gmail account.'
     def login
-      $username = ask 'Enter your username:'
-      $password = ask 'Enter your password:'
-      gmail = Gmail.connect!($username, $password)
-      say 'User Authorized!'
+      @username = ask 'Enter your username:'
+      @password = ask 'Enter your password:'
+      write_config
     end
     desc 'mail', 'Send an email.'
     def mail
-      $username = ask 'Enter your username:'
-      $password = ask 'Enter your password:'
-      gmail = Gmail.connect!($username, $password)
+      gmail = Gmail.connect!(@username, @password)
       to_mail = ask 'Enter email-id:'
       subject_mail = ask 'Enter subject:'
       body_mail = ask 'Enter body:'
@@ -41,9 +44,7 @@ module Tgm
     end
     desc 'inbox', 'Get your inbox statistics'
     def inbox
-      $username = ask 'Enter your username:'
-      $password = ask 'Enter your password:'
-      gmail = Gmail.connect!($username, $password)
+      gmail = Gmail.connect!(@username, @password)
       noInbox=gmail.inbox.count
       noUnread=gmail.inbox.count(:unread)
       noRead=gmail.inbox.count(:read)
@@ -59,9 +60,7 @@ module Tgm
     method_option :delete, :aliases => '-d'
     method_option :exists, :aliases => '-e'
     def labels
-      $username = ask 'Enter your username:'
-      $password = ask 'Enter your password:'
-      gmail = Gmail.connect!($username, $password)
+      gmail = Gmail.connect!(@username, @password)
       if options[:all]==true
         @labels=gmail.labels.all
         say 'All Labels:'
@@ -93,9 +92,7 @@ module Tgm
     desc 'from', 'Get mails from a specific address'
     method_option :user, :required => true
     def from
-      $username = ask 'Enter your username:'
-      $password = ask 'Enter your password:'
-      gmail = Gmail.connect!($username, $password)
+      gmail = Gmail.connect!(@username, @password)
       say 'Emails from: '+options[:user].to_s
       say 'Count: '+gmail.mailbox('[Gmail]/All Mail').count(:from => options[:user]).to_s
       @messages=gmail.mailbox('[Gmail]/All Mail').search(:from => options[:user])
@@ -106,9 +103,7 @@ module Tgm
     end
     desc 'read', 'Mark all emails as read.'
     def read
-      $username = ask 'Enter your username: '
-      $password = ask 'Enter your password: '
-      gmail = Gmail.connect!($username,$password)
+      gmail = Gmail.connect!(@username,@password)
       @unreademails=gmail.inbox.emails(:unread)
       @unreademails.each do |email|
         email.read!
@@ -118,14 +113,32 @@ module Tgm
     desc 'delete', 'Delete emails from a particular user'
     method_option :from, :required => true
     def delete
-      $username = ask 'Enter your username: '
-      $password = ask 'Enter your password: '
-      gmail = Gmail.connect!($username,$password)
+      gmail = Gmail.connect!(@username,@password)
       gmail.inbox.find(:from => options[:from]).each do |email|
         email.delete!
       end
       gmail.logout
     end
+
+    private
+
+    CONFIG_FILE = 'config.yml'
+
+    def write_config
+      config = {}
+      config['username']=@username
+      config['password']=@password
+      File.open(CONFIG_FILE, 'w') do |f|
+        f.write config.to_yaml
+      end
+    end
+
+    def read_config
+      config = YAML.load_file(CONFIG_FILE)
+      @username = config['username']
+      @password = config['password']
+    end
+
   end
 end
 
