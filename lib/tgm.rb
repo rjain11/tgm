@@ -122,7 +122,7 @@ module Tgm
 
     private
 
-    CONFIG_FILE = 'config.yml'
+    CONFIG_FILE = '/Users/rishabhjain/Desktop/main/ruby/commandline/tgm/lib/config.yml'
 
     def write_config
       config = {}
